@@ -170,7 +170,7 @@ class BucketDataProvider(object):
             # Encode sentences
             tokens = TextTool.tokenize(sent, self.language)
             data['sentence'] = self.textbank.encode_tokens(tokens, flag_add_bos=False)
-            data['sent_score'] = sid2score[sid] if self.sent_score_file else 1
+            data['sent_score'] = sid2score[sid] if self.sent_score_file and sid in sid2score else 1
             self._data_queue.append(data)
             if verbose and (ind_a + 1) % 20000 == 0:
                 logger.debug('%d/%d annotation', ind_a + 1, len(annos))

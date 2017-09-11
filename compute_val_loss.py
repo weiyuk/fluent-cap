@@ -140,7 +140,7 @@ def main(unused_args):
           language=FLAGS.language, 
           flag_shuffle=False, 
           method=config.fluency_method,
-          rootpath=rootpath)
+          rootpath=FLAGS.rootpath)
     iter2loss = {}
     for iter_n, model_path in model_path_list:
       loss_file = os.path.join(output_dir, 'model_%d.ckpt' % iter_n, 'loss.txt')

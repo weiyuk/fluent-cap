@@ -228,7 +228,8 @@ def main(unused_args):
 
     iters_done = 0
     data_provider = BucketDataProvider(FLAGS.train_collection, vocab_file, FLAGS.vf_name, 
-                               language=FLAGS.language, method=config.fluency_method, rootpath=rootpath)
+                               language=FLAGS.language, method=config.fluency_method, 
+                               rootpath=FLAGS.rootpath)
     
     for i in range(config.num_epoch):
       logger.info('epoch %d', i)
