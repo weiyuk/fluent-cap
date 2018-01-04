@@ -78,7 +78,6 @@ class BucketDataProvider(object):
                 flag_shuffle=True, method=None, fluency_threshold=DEFAULT_FLUENCY_U, rootpath=ROOT_PATH):
         self.language = language
         self.anno_file_path = utility.get_sent_file(collection, language, rootpath)
-        self.sent_score_file = utility.get_sent_score_file(collection, language, rootpath)
         self.fluency_threshold = fluency_threshold
         self.method = method
         if method:
@@ -88,6 +87,9 @@ class BucketDataProvider(object):
             if method == 'weighted':
                 # Not sampling the data if fluency-guided method is weighted_loss
                 self.method = method = None 
+            self.sent_score_file = utility.get_sent_score_file(collection, language, rootpath)
+        else:
+            self.sent_score_file = None
 
         self.textbank = TextBank(vocab_file)
         assert self.textbank.vocab[TOKEN_PAD] == 0

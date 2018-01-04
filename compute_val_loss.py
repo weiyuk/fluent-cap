@@ -91,6 +91,8 @@ def main(unused_args):
   config_path = os.path.join(os.path.dirname(__file__), 'model_conf', FLAGS.model_name + '.py')
   config = utility.load_config(config_path)
 
+  if FLAGS.fluency_method == 'None':
+      FLAGS.fluency_method = None
   config.fluency_method = FLAGS.fluency_method
   if config.fluency_method == 'weighted':
     config.use_weighted_loss = True

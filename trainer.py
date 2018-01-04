@@ -137,6 +137,8 @@ def main(unused_args):
   else:
     num_epoch_save = 1
 
+  if FLAGS.fluency_method == 'None':
+      FLAGS.fluency_method = None
   config.fluency_method = FLAGS.fluency_method
   if config.fluency_method == 'weighted':
     config.use_weighted_loss = True
