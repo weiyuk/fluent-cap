@@ -125,12 +125,16 @@ def main(unused_args):
   # Load model configuration
   config_path = os.path.join(os.path.dirname(__file__), 'model_conf', FLAGS.model_name + '.py')
   config = utility.load_config(config_path)
-
-  FLAGS.vf_dir = os.path.join(FLAGS.rootpath, FLAGS.train_collection, 'FeatureData', FLAGS.vf_name)
-  vocab_file = utility.get_vocab_file(FLAGS.train_collection, FLAGS.word_cnt_thr, FLAGS.rootpath)
+  
+  rootpath = FLAGS.rootpath
+  train_collection = FLAGS.train_collection
+  feature = FLAGS.vf_name
+  
+  vf_dir = utility.get_feat_dir(train_collection, feature, rootpath) 
+  vocab_file = utility.get_vocab_file(train_collection, FLAGS.word_cnt_thr, rootpath)
   textbank = TextBank(vocab_file)
   config.vocab_size = len(textbank.vocab)
-  config.vf_size = int(open(os.path.join(FLAGS.vf_dir, 'shape.txt')).read().split()[1])
+  config.vf_size = int(open(os.path.join(vf_dir, 'shape.txt')).read().split()[1])
 
   if hasattr(config,'num_epoch_save'):
     num_epoch_save = config.num_epoch_save

@@ -84,12 +84,12 @@ def main(unused_args):
   img_list = map(str.strip, open(img_set_file).readlines())
 
   # have visual feature ready
-  FLAGS.vf_dir = os.path.join(rootpath, test_collection, 'FeatureData', feature)
-  vf_reader = BigFile( FLAGS.vf_dir )
+  vf_dir = utility.get_feat_dir(test_collection, feature, rootpath)
+  vf_reader = BigFile( vf_dir )
 
   textbank = TextBank(utility.get_train_vocab_file(FLAGS))
   config.vocab_size = len(textbank.vocab)
-  config.vf_size = int(open(os.path.join(FLAGS.vf_dir, 'shape.txt')).read().split()[1])
+  config.vf_size = int(open(os.path.join(vf_dir, 'shape.txt')).read().split()[1])
 
   model_dir = utility.get_model_dir(FLAGS)
   output_dir = utility.get_pred_dir(FLAGS)

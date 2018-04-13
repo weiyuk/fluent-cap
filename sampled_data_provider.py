@@ -81,13 +81,13 @@ class BucketDataProvider(object):
         self.fluency_threshold = fluency_threshold
         self.method = method
         if method:
+            self.sent_score_file = utility.get_sent_score_file(collection, language, rootpath)
             assert method in ['sample','filter','weighted']
             assert self.sent_score_file != None
-            assert fluency_threshold>0
+            assert fluency_threshold > 0
             if method == 'weighted':
                 # Not sampling the data if fluency-guided method is weighted_loss
                 self.method = method = None 
-            self.sent_score_file = utility.get_sent_score_file(collection, language, rootpath)
         else:
             self.sent_score_file = None
 
